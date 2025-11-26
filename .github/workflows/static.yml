@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>שיעורים פרטיים במתמטיקה - שגיא</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .flyer {
+            background: white;
+            max-width: 800px;
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '📐';
+            position: absolute;
+            font-size: 150px;
+            opacity: 0.1;
+            top: -20px;
+            left: -20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .header::after {
+            content: '📊';
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.1;
+            bottom: -10px;
+            right: -10px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header .emoji {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 35px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .intro strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+
+        .benefit-card .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .benefit-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .benefit-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .features {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 35px;
+        }
+
+        .features h2 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            gap: 15px;
+        }
+
+        .feature-list li {
+            padding: 15px 20px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .feature-list li:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .feature-list li::before {
+            content: '✔️';
+            font-size: 1.5em;
+            margin-left: 15px;
+            color: #667eea;
+        }
+
+        .cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .cta h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            font-size: 1.2em;
+            margin-bottom: 25px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .location-info {
+            text-align: center;
+            margin: 25px 0;
+            font-size: 1.1em;
+            color: #555;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="flyer">
+        <div class="header">
+            <span class="emoji">📘</span>
+            <h1>שיעורים פרטיים במתמטיקה</h1>
+            <p>עד כיתה י' עם שגיא!</p>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <p>מחפשים מורה פרטי שיסביר בצורה ברורה וסבלנית?</p>
+                <p>אני <strong>שגיא</strong>, 'בעל תואר במדעי המחשב, מעניק שיעורים פרטיים במתמטיקה לתלמידיםעד כיתה י.</p>
+            </div>
+
+            <div class="benefits">
+                <div class="benefit-card">
+                    <span class="icon">🎯</span>
+                    <h3>ליווי אישי</h3>
+                    <p>משימות מותאמות אישית לרמת התלמיד וצרכיו הייחודיים</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="icon">💪</span>
+                    <h3>חיזוק יסודות</h3>
+                    <p>השלמת פערים ובניית בסיס חזק למתמטיקה</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="icon">🚀</span>
+                    <h3>שיפור ביצועים</h3>
+                    <p>הכנה מקיפה למבחנים ועזרה בשיעורי בית</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="icon">🌟</span>
+                    <h3>ביטחון עצמי</h3>
+                    <p>פיתוח יכולת חשיבה והגברת הביטחון בעצמי</p>
+                </div>
+            </div>
+
+            <div class="features">
+                <h2>מה כולל השיעור?</h2>
+                <ul class="feature-list">
+                    <li>חיזוק יסודות והשלמת פערים</li>
+                    <li>ליווי אישי ומשימות מותאמות</li>
+                    <li>הכנה למבחנים ושיעורי בית</li>
+                    <li>שיפור הביטחון ויכולת החשיבה</li>
+                </ul>
+            </div>
+
+            <div class="location-info">
+                📍 שיעורים בבית התלמיד / אונליין לפי בחירה
+            </div>
+
+            <div class="cta">
+                <h2>מוכנים להתחיל?</h2>
+                <p>📩 לפרטים וקביעת שיעור ניסיון</p>
+                <div style="margin: 20px 0;">
+                    <p style="font-size: 1.3em; margin-bottom: 15px;">📞 חייגו: <strong>054-331-6152</strong></p>
+                </div>
+                <a href="https://wa.me/972543316152?text=היי%20שגיא,%20אני%20מעוניין/ת%20בשיעורים%20פרטיים%20במתמטיקה" target="_blank" class="cta-button">💬 שלחו הודעה בוואטסאפ</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
